@@ -1,7 +1,9 @@
 'use client'
 
 import React, { useEffect, useRef, useState } from 'react'
-import styles from '../styles/scrollbar.module.sass'
+import { Typography } from '@material-tailwind/react'
+
+import styles from '@/styles/scrollbar.module.sass'
 
 const bgColorDark = 'bg-stone-900'
 const bgColorLight = 'bg-stone-600'
@@ -9,7 +11,6 @@ const bgColorLight = 'bg-stone-600'
 export default function Home() {
   const [bgColor, setbgColor] = useState(bgColorDark)
   const scrollContainerRef = useRef<HTMLDivElement>(null)
-
 
   useEffect(() => {
     const handleScroll = () => {
@@ -37,20 +38,26 @@ export default function Home() {
 
 
   return (
-    <main className="h-screen grid bg-red-800">
+    <main className='h-screen grid'>
 
       <header className={`row-end-2 ${bgColor}`}>
-        <nav className="flex items-center justify-end gap-5 pr-5 h-full ">
-          <a href="#about">about</a>
-          <a href="#stack">stack</a>
-          <a href="#projects">projects</a>
+        <nav className='flex items-center justify-end gap-5 pr-5 h-full'>
+          <a href='#about'>sobre</a>
+          <a href='#stack'>stack</a>
+          <a href='#projects'>projetos</a>
         </nav>
       </header>
         
       <div ref={scrollContainerRef} className={`${styles.scrollbar} snap-mandatory snap-y overflow-auto row-start-2 row-end-13 h-full`}>
-        <div id="about" className={`snap-center flex items-center justify-center h-full ${bgColorLight}`}><span>about</span></div>
-        <div id="stack" className={`snap-center flex items-center justify-center h-full ${bgColorDark}`}><span>stack</span></div>
-        <div id="projects" className={`snap-center flex items-center justify-center h-full ${bgColorLight}`}><span>projects</span></div>
+        <div id='about' className={`snap-center flex items-center justify-center h-full ${bgColorLight}`}>
+          <div className='flex flex-col bg-emerald-700'>
+            <Typography className='text-9xl' variant='h1' placeholder>Hudson</Typography>
+            <Typography className='text-6xl' variant='h5' placeholder>Software Developer</Typography>
+            
+          </div>
+        </div>
+        <div id='stack' className={`snap-center flex items-center justify-center h-full ${bgColorDark}`}><span>stack</span></div>
+        <div id='projects' className={`snap-center flex items-center justify-center h-full ${bgColorLight}`}><span>projects</span></div>
       </div>
 
     </main>
