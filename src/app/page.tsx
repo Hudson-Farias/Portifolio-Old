@@ -8,29 +8,30 @@ const bgColorLight = 'bg-stone-600'
 
 export default function Home() {
   const [bgColor, setbgColor] = useState(bgColorDark)
-  const scrollContainerRef = useRef(null);
+  const scrollContainerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollContainer = scrollContainerRef.current;
-      const scrollPosition = scrollContainer.scrollTop;
+      const scrollContainer = scrollContainerRef.current
+      if (!scrollContainer) return
+
+      const scrollPosition = scrollContainer.scrollTop
+      const sectionHeight = scrollContainer.clientHeight
       
-      const sectionHeight = scrollContainer.clientHeight;
       const newSection = scrollPosition / sectionHeight
 
       if (newSection % 1 > 0.7) {
         const color = Math.ceil(newSection) % 2 === 0 ? bgColorDark : bgColorLight
-        setbgColor(color);
+        setbgColor(color)
 
       } else if (newSection % 1 < 0.03) {
         const color = Math.floor(newSection) % 2 === 0 ? bgColorDark : bgColorLight
-        setbgColor(color);
+        setbgColor(color)
       }
+    }
 
-    };
-
-    const scrollContainer = scrollContainerRef.current;
-    scrollContainer && scrollContainer.addEventListener('scroll', handleScroll);
+    const scrollContainer = scrollContainerRef.current
+    scrollContainer && scrollContainer.addEventListener('scroll', handleScroll)
   }, [])
 
 
