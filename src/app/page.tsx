@@ -10,6 +10,7 @@ export default function Home() {
   const [bgColor, setbgColor] = useState(bgColorDark)
   const scrollContainerRef = useRef<HTMLDivElement>(null)
 
+
   useEffect(() => {
     const handleScroll = () => {
       const scrollContainer = scrollContainerRef.current
