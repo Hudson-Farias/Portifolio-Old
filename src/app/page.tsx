@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useEffect, useRef, useState } from 'react'
-import styles from './scrollbar.module.sass'
+import styles from '../styles/scrollbar.module.sass'
 
 const bgColorDark = 'bg-stone-900'
 const bgColorLight = 'bg-stone-600'
