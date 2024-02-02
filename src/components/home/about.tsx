@@ -41,7 +41,7 @@ export default function About() {
 
     return (
         <>        
-            <div className='flex flex-col w-10/12 md:w-6/12 h-20 md:h-36'>
+            <div className='flex flex-col w-9/12 md:w-6/12 h-20 md:h-36'>
                 <div className='flex items-end gap-2'>
                     <Typography className='md:text-8xl' variant='h1' placeholder>Hudson</Typography>
                     <a href='https://www.linkedin.com/in/hudsonfarias/' target='_blank'>
