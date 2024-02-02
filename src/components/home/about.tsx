@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Typography } from '@material-tailwind/react'
-import { FaLinkedin, FaWhatsapp, FaGithub } from 'react-icons/fa'
+import { FaLinkedin, FaGithub } from 'react-icons/fa'
 
 export default function About() {
     const roles = ['Desenvolvedor de Software', 'Programador Fullstack',
@@ -41,14 +41,17 @@ export default function About() {
 
     return (
         <>        
-            <div className='flex flex-col w-8/12'>
+            <div className='flex flex-col w-11/12 md:w-6/12 h-20 md:h-2/6'>
                 <div className='flex items-end gap-2'>
-                    <Typography className='md:text-9xl' variant='h1' placeholder>Hudson</Typography>
-                    <FaLinkedin className='mb-4 text-4xl' />
-                    <FaWhatsapp className='mb-4 text-4xl' />
-                    <FaGithub className='mb-4 text-4xl' />
+                    <Typography className='md:text-8xl' variant='h1' placeholder>Hudson</Typography>
+                    <a href='https://www.linkedin.com/in/hudsonfarias/' target='_blank'>
+                        <FaLinkedin className='mb-3 md:mb-4 text-2xl md:text-4xl' />
+                    </a>
+                    <a href='https://github.com/hudson-farias?tab=repositories' target='_blank'>
+                        <FaGithub className='mb-3 md:mb-4 text-2xl md:text-4xl' />
+                    </a>
                 </div>
-                <Typography className='md:text-6xl min-h-16-700' variant='h5' placeholder>{typedText}</Typography>
+                <Typography className='md:text-5xl min-h-16-700' variant='h5' placeholder>{typedText}</Typography>
             </div>
         </>
     )
