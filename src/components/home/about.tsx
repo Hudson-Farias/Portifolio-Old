@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Typography } from '@material-tailwind/react'
-
+import { FaLinkedin, FaWhatsapp, FaGithub } from 'react-icons/fa'
 
 export default function About() {
     const roles = ['Desenvolvedor de Software', 'Programador Fullstack',
@@ -42,8 +42,13 @@ export default function About() {
     return (
         <>        
             <div className='flex flex-col w-8/12'>
-                <Typography className='text-9xl' variant='h1' placeholder>Hudson</Typography>
-                <Typography className='text-6xl min-h-16' variant='h5' placeholder>{typedText}</Typography>
+                <div className='flex items-end gap-2'>
+                    <Typography className='md:text-9xl' variant='h1' placeholder>Hudson</Typography>
+                    <FaLinkedin className='mb-4 text-4xl' />
+                    <FaWhatsapp className='mb-4 text-4xl' />
+                    <FaGithub className='mb-4 text-4xl' />
+                </div>
+                <Typography className='md:text-6xl min-h-16-700' variant='h5' placeholder>{typedText}</Typography>
             </div>
         </>
     )
