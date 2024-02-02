@@ -1,7 +1,8 @@
 'use client'
 
 import React, { useEffect, useRef, useState } from 'react'
-import { Typography } from '@material-tailwind/react'
+
+import About from '@/components/home/about'
 
 import styles from '@/styles/scrollbar.module.sass'
 
@@ -49,13 +50,7 @@ export default function Home() {
       </header>
         
       <div ref={scrollContainerRef} className={`${styles.scrollbar} snap-mandatory snap-y overflow-auto row-start-2 row-end-13 h-full`}>
-        <div id='about' className={`snap-center flex items-center justify-center h-full ${bgColorLight}`}>
-          <div className='flex flex-col bg-emerald-700'>
-            <Typography className='text-9xl' variant='h1' placeholder>Hudson</Typography>
-            <Typography className='text-6xl' variant='h5' placeholder>Software Developer</Typography>
-            
-          </div>
-        </div>
+        <div id='about' className={`snap-center flex items-center justify-center h-full ${bgColorLight}`}><About /></div>
         <div id='stack' className={`snap-center flex items-center justify-center h-full ${bgColorDark}`}><span>stack</span></div>
         <div id='projects' className={`snap-center flex items-center justify-center h-full ${bgColorLight}`}><span>projects</span></div>
       </div>
