@@ -4,7 +4,15 @@ import React, { useEffect, useRef, useState } from 'react'
 
 import About from '@/components/home/about'
 
-import styles from '@/styles/scrollbar.module.sass'
+import styles from '@/styles/home/scrollbar.module.sass'
+
+const snapContainers = [
+  {
+    id: 'about',
+    label: 'sobre',
+    childen: <About />
+  },
+]
 
 const bgColorDark = 'bg-stone-900'
 const bgColorLight = 'bg-stone-600'
@@ -39,20 +47,20 @@ export default function Home() {
 
 
   return (
-    <main className='h-screen grid'>
+    <main className={`h-screen grid ${snapContainers.length > 1 ? 'grid-rows-[3rem,1fr]' : 'grid-rows-[0rem,1fr]'}`}>
 
-      <header className={`row-end-2 ${bgColor}`}>
+      <header className={`min-h-3 ${bgColor}`}>
         <nav className='flex items-center justify-end gap-5 pr-5 h-full'>
-          <a href='#about'>sobre</a>
-          <a href='#stack'>stack</a>
-          <a href='#projects'>projetos</a>
+          { snapContainers.length > 1 && snapContainers.map(container => <a href={`#${container.id}`}>{container.label}</a>) }
         </nav>
       </header>
         
-      <div ref={scrollContainerRef} className={`${styles.scrollbar} snap-mandatory snap-y overflow-auto row-start-2 row-end-13 h-full`}>
-        <div id='about' className={`snap-center flex items-center justify-center h-full ${bgColorLight}`}><About /></div>
-        <div id='stack' className={`snap-center flex items-center justify-center h-full ${bgColorDark}`}><span>stack</span></div>
-        <div id='projects' className={`snap-center flex items-center justify-center h-full ${bgColorLight}`}><span>projects</span></div>
+      <div ref={scrollContainerRef} className={`${styles.scrollbar} snap-mandatory snap-y overflow-auto h-full`}>
+        { snapContainers.map((container, index) => 
+          <div id={container.id} className={`snap-center flex items-center justify-center h-full ${index % 2 === 0 ? bgColorLight : bgColorDark}`}>
+            {container.childen}
+          </div>
+        )} 
       </div>
 
     </main>
