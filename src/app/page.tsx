@@ -10,7 +10,7 @@ const snapContainers = [
   {
     id: 'about',
     label: 'sobre',
-    childen: <About />
+    children: <About />
   },
 ]
 
@@ -51,14 +51,14 @@ export default function Home() {
 
       <header className={`min-h-3 ${bgColor}`}>
         <nav className='flex items-center justify-end gap-5 pr-5 h-full'>
-          { snapContainers.length > 1 && snapContainers.map(container => <a href={`#${container.id}`}>{container.label}</a>) }
+          { snapContainers.length > 1 && snapContainers.map(container => <a href={`#${container.id}`} key={container.id}>{container.label}</a>) }
         </nav>
       </header>
         
       <div ref={scrollContainerRef} className={`${styles.scrollbar} snap-mandatory snap-y overflow-auto h-full`}>
         { snapContainers.map((container, index) => 
-          <div id={container.id} className={`snap-center flex items-center justify-center h-full ${index % 2 === 0 ? bgColorLight : bgColorDark}`}>
-            {container.childen}
+          <div id={container.id} className={`snap-center flex items-center justify-center h-full ${index % 2 === 0 ? bgColorLight : bgColorDark}`}  key={container.id}>
+            {container.children}
           </div>
         )} 
       </div>

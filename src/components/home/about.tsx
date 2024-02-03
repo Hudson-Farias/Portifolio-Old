@@ -36,7 +36,7 @@ export default function About() {
         const timeoutId = setTimeout(handleTyping, 150)
       
         return () => clearTimeout(timeoutId)
-      }, [currentIndex, textToType, typedText, isDeleting])
+      }, [roles, currentIndex, textToType, typedText, isDeleting])
 
 
     return (
