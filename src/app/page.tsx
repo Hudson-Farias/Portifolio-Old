@@ -3,14 +3,20 @@
 import React, { useEffect, useRef, useState } from 'react'
 
 import About from '@/components/home/about'
+import Contact from '@/components/home/contact'
 
 import styles from '@/styles/home/scrollbar.module.sass'
 
 const snapContainers = [
   {
-    id: 'about',
-    label: 'sobre',
+    id: 'home',
+    label: 'home',
     children: <About />
+  },
+  {
+    id: 'contact',
+    label: 'contato',
+    children: <Contact />
   },
 ]
 
