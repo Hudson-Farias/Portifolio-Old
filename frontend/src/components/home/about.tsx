@@ -47,7 +47,7 @@ export default function About() {
                     <a href='https://www.linkedin.com/in/hudsonfarias/' target='_blank'>
                         <FaLinkedin className='mb-3 md:mb-4 text-2xl md:text-4xl' />
                     </a>
-                    <a href='https://github.com/hudson-farias?tab=repositories' target='_blank'>
+                    <a href='https://github.com/hudson-farias' target='_blank'>
                         <FaGithub className='mb-3 md:mb-4 text-2xl md:text-4xl' />
                     </a>
                 </div>
