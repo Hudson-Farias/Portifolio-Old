@@ -1,7 +1,15 @@
 import React, { useState } from 'react'
+import axios from 'axios'
 import { Card, Typography, Input, Button } from '@material-tailwind/react'
 
+
 export default function Contact() {
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL
+
+    const [buttonFormState, setButtonFormState] = useState({
+        text: 'Enviar',
+        disabled: false
+    })
     const [contactData, setContactData] = useState({
         name: '',
         last_name: '',
@@ -16,6 +24,11 @@ export default function Contact() {
         setContactData(prevContactData => { return {...prevContactData, [key]: value }})
     }
 
+    const submitFormContact = async () => {
+        await axios.post(`${apiUrl}/contact`, contactData)
+        setButtonFormState({ text: 'Enviado', disabled: !buttonFormState.disabled })
+    }
+
     return (
         <>
             <Card className='flex flex-col gap-8 px-10 pt-10 pb-5 bg-transparent shadow-none' placeholder>
@@ -28,7 +41,7 @@ export default function Contact() {
                 <Input onChange={handleChange} name='email' variant='static' label='Email' type='email' color='white' crossOrigin />
                 <Input onChange={handleChange} name='message' variant='static' label='Mensagem' color='white' crossOrigin />
 
-                <Button onClick={() => console.log(contactData)} color='white' disabled placeholder>Enviar</Button>
+                <Button onClick={submitFormContact} color='white' disabled={buttonFormState.disabled} placeholder>{buttonFormState.text}</Button>
             </Card>     
         </>
     )
