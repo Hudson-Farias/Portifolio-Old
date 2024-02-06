@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import { Card, Typography, Input, Button } from '@material-tailwind/react'
 
+import { FaWhatsapp, FaDiscord, FaTelegram } from 'react-icons/fa'
 
 export default function Contact() {
     const apiUrl = process.env.NEXT_PUBLIC_API_URL
@@ -41,7 +42,27 @@ export default function Contact() {
                 <Input onChange={handleChange} name='email' variant='static' label='Email' type='email' color='white' crossOrigin />
                 <Input onChange={handleChange} name='message' variant='static' label='Mensagem' color='white' crossOrigin />
 
-                <Button onClick={submitFormContact} color='white' disabled={buttonFormState.disabled} placeholder>{buttonFormState.text}</Button>
+                <div>
+                    <Button className='w-full' onClick={submitFormContact} color='white' disabled={buttonFormState.disabled} placeholder>{buttonFormState.text}</Button>
+
+                    <div className='flex gap-x-3 mt-5'>
+                        <a href='https://wa.me/message/GIRAZSPEDZSXE1' target='_blank'>
+                            <Button className='flex items-center' color='green' placeholder>
+                                <FaWhatsapp className='text-xl mr-3' />Whatsapp
+                            </Button>
+                        </a>
+                        <a href='https://discord.com/users/1127594477536694332' target='_blank'>
+                            <Button className='flex items-center' color='blue' placeholder>
+                                <FaDiscord className='text-xl mr-3' />Discord
+                            </Button>
+                        </a>
+                        <a href='#'>
+                            <Button className='flex items-center' color='light-blue' disabled placeholder>
+                                <FaTelegram className='text-xl mr-3' />Telegram
+                            </Button>
+                        </a>
+                    </div>
+                </div>
             </Card>     
         </>
     )
