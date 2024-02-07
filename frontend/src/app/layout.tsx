@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+
 import "../styles/globals.css";
+import '@radix-ui/themes/styles.css';
+
+import { Theme } from '@radix-ui/themes'
 
 import { Analytics } from '@vercel/analytics/react'
 
@@ -19,8 +23,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        {children}
-        <Analytics />
+        <Theme>
+          {children}
+          <Analytics />
+        </Theme>
       </body>
     </html>
   );

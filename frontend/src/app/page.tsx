@@ -10,12 +10,12 @@ import styles from '@/styles/home/scrollbar.module.sass'
 const snapContainers = [
   {
     id: 'home',
-    label: 'home',
+    label: 'Home',
     children: <About />
   },
   {
     id: 'contact',
-    label: 'contato',
+    label: 'Contato',
     children: <Contact />
   },
 ]
@@ -57,7 +57,7 @@ export default function Home() {
 
       <header className={`min-h-3 ${bgColor}`}>
         <nav className='flex items-center justify-end gap-5 pr-5 h-full'>
-          { snapContainers.length > 1 && snapContainers.map(container => <a href={`#${container.id}`} key={container.id}>{container.label}</a>) }
+          { snapContainers.length > 1 && snapContainers.map(container => <a href={`#${container.id}`} key={container.id} className='text-white'>{container.label}</a>) }
         </nav>
       </header>
         
