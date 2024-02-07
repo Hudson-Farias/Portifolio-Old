@@ -4,7 +4,7 @@ import { Flex, Link, Heading, Text } from '@radix-ui/themes'
 import { FaLinkedin, FaGithub } from 'react-icons/fa'
 
 export default function About() {
-    const roles = ['Desenvolvedor de Software', 'Programador Fullstack', 'Programador Backend', 'Programador Frontend', 'Devops']
+    const roles = ['Desenvolvedor de Software', 'Fullstack', 'Backend', 'Frontend', 'Devops']
 
     const [typedText, setTypedText] = useState(roles[0])
     const [currentIndex, setCurrentIndex] = useState(roles[0].length)
