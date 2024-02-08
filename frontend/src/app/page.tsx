@@ -63,7 +63,7 @@ export default function Home() {
         
       <div ref={scrollContainerRef} className={`${styles.scrollbar} snap-mandatory snap-y overflow-auto h-full`}>
         { snapContainers.map((container, index) => 
-          <div id={container.id} className={`snap-center flex items-center justify-center h-full ${index % 2 === 0 ? bgColorLight : bgColorDark}`}  key={container.id}>
+          <div id={container.id} className={`relative snap-center flex items-center justify-center h-full ${index % 2 === 0 ? bgColorLight : bgColorDark}`}  key={container.id}>
             {container.children}
           </div>
         )} 

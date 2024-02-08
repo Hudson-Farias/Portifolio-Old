@@ -4,20 +4,18 @@ import { Card, Flex, Link, Text, TextField, TextArea, Button } from '@radix-ui/t
 
 import { FaWhatsapp, FaDiscord } from 'react-icons/fa'
 
+const contactFormDefault = {
+    name: '',
+    last_name: '',
+    email: '',
+    message: ''
+}
+
 export default function Contact() {
     const apiUrl = process.env.NEXT_PUBLIC_API_URL
 
-    const [buttonFormState, setButtonFormState] = useState({
-        text: 'Enviar',
-        disabled: false
-    })
-    const [contactData, setContactData] = useState({
-        name: '',
-        last_name: '',
-        email: '',
-        message: ''
-
-    })
+    const [contactData, setContactData] = useState(contactFormDefault)
+    const [isToastVisible, setToastVisible] = useState(false)
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement|HTMLTextAreaElement>) => {
         const key = event.target.name
@@ -26,8 +24,16 @@ export default function Contact() {
     }
 
     const submitFormContact = async () => {
+        const values = Object.values(contactData);
+        if (!values.every(value => value)) return
+
         await axios.post(`${apiUrl}/contact`, contactData)
-        setButtonFormState({ text: 'Enviado', disabled: !buttonFormState.disabled })
+        setContactData(contactFormDefault)
+        setToastVisible(true)
+
+        setTimeout(() => {
+            setToastVisible(false);
+        }, 10000)
     }
 
     return (
@@ -37,17 +43,15 @@ export default function Contact() {
                     <Text className='text-3xl mb-4 text-white' as='p'>Contate-me</Text>
                     
                     <Flex justify='between' gap='3'>
-                        <TextField.Input onChange={handleChange} placeholder='Nome' name='name' />
-                        <TextField.Input onChange={handleChange} placeholder='Sobrenome' name='last_name' />
+                        <TextField.Input onChange={handleChange} value={contactData.name} placeholder='Nome' name='name' />
+                        <TextField.Input onChange={handleChange} value={contactData.last_name} placeholder='Sobrenome' name='last_name' />
                     </Flex>
 
-                    <TextField.Input onChange={handleChange} placeholder='Email' name='email' type='email' />
-                    <TextArea onChange={handleChange} placeholder='Mensagem' name='message' />
+                    <TextField.Input onChange={handleChange} value={contactData.email} placeholder='Email' name='email' type='email' />
+                    <TextArea onChange={handleChange} value={contactData.message} placeholder='Mensagem' name='message' />
 
                     <Flex direction='column' gap='2'>
-                        <Button className='w-full' onClick={submitFormContact} color='gray' size='3' disabled={buttonFormState.disabled}>
-                            {buttonFormState.text}
-                        </Button>
+                        <Button className='w-full' onClick={submitFormContact} color='gray' size='3'>Enviar</Button>
 
                         <Flex gap='2'>
                             <Link className='w-1/2' href='https://wa.me/message/GIRAZSPEDZSXE1' target='_blank'>
@@ -63,7 +67,11 @@ export default function Contact() {
                         </Flex>
                     </Flex>
                 </Flex>
-            </Card>     
+            </Card>
+
+            <Card className={`absolute bottom-0 mb-3 ${isToastVisible ? '' : 'hidden'}`} variant='ghost'>
+                <Text className='text-white'>Enviado</Text>
+            </Card> 
         </>
     )
 }
