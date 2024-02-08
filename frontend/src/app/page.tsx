@@ -1,31 +1,58 @@
 'use client'
 
 import React, { useEffect, useRef, useState } from 'react'
+import axios from 'axios'
 
 import About from '@/components/home/about'
 import Contact from '@/components/home/contact'
 
 import styles from '@/styles/home/scrollbar.module.sass'
 
-const snapContainers = [
-  {
-    id: 'home',
-    label: 'Home',
-    children: <About />
-  },
-  {
-    id: 'contact',
-    label: 'Contato',
-    children: <Contact />
-  },
-]
-
 const bgColorDark = 'bg-stone-900'
 const bgColorLight = 'bg-stone-600'
 
+interface DataI {
+  roles?: string[],
+  urls?: {
+    linkedin: string,
+    github: string,
+    whatssap: string,
+    discord: string
+  }
+}
+
 export default function Home() {
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL
+
+  const [data, setData] = useState<DataI>({})
+
   const [bgColor, setbgColor] = useState(bgColorDark)
   const scrollContainerRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await axios.get(`${apiUrl}/infos`)
+      const data = response.data
+      setData(data)
+
+      console.log(data)
+    }
+
+    fetchData()
+  }, [])
+
+  const snapContainers = [
+    {
+      id: 'home',
+      label: 'Home',
+      children: <About roles={data.roles} urls={data.urls} />
+    },
+    {
+      id: 'contact',
+      label: 'Contato',
+      children: <Contact urls={data.urls} />
+    },
+  ]
 
   useEffect(() => {
     const handleScroll = () => {
@@ -34,7 +61,7 @@ export default function Home() {
 
       const scrollPosition = scrollContainer.scrollTop
       const sectionHeight = scrollContainer.clientHeight
-      
+
       const newSection = scrollPosition / sectionHeight
 
       if (newSection % 1 > 0.7) {
@@ -57,16 +84,16 @@ export default function Home() {
 
       <header className={`min-h-3 ${bgColor}`}>
         <nav className='flex items-center justify-end gap-5 pr-5 h-full'>
-          { snapContainers.length > 1 && snapContainers.map(container => <a href={`#${container.id}`} key={container.id} className='text-white'>{container.label}</a>) }
+          {snapContainers.length > 1 && snapContainers.map(container => <a href={`#${container.id}`} key={container.id} className='text-white'>{container.label}</a>)}
         </nav>
       </header>
-        
+
       <div ref={scrollContainerRef} className={`${styles.scrollbar} snap-mandatory snap-y overflow-auto h-full`}>
-        { snapContainers.map((container, index) => 
-          <div id={container.id} className={`relative snap-center flex items-center justify-center h-full ${index % 2 === 0 ? bgColorLight : bgColorDark}`}  key={container.id}>
+        {snapContainers.map((container, index) =>
+          <div id={container.id} className={`relative snap-center flex items-center justify-center h-full ${index % 2 === 0 ? bgColorLight : bgColorDark}`} key={container.id}>
             {container.children}
           </div>
-        )} 
+        )}
       </div>
 
     </main>

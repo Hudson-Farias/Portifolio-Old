@@ -4,6 +4,13 @@ import { Card, Flex, Link, Text, TextField, TextArea, Button } from '@radix-ui/t
 
 import { FaWhatsapp, FaDiscord } from 'react-icons/fa'
 
+interface PropsI {
+    urls?: {
+        whatssap: string,
+        discord: string
+    }
+}
+
 const contactFormDefault = {
     name: '',
     last_name: '',
@@ -11,7 +18,7 @@ const contactFormDefault = {
     message: ''
 }
 
-export default function Contact() {
+export default function Contact({ urls }: PropsI) {
     const apiUrl = process.env.NEXT_PUBLIC_API_URL
 
     const [contactData, setContactData] = useState(contactFormDefault)
@@ -54,12 +61,12 @@ export default function Contact() {
                         <Button className='w-full' onClick={submitFormContact} color='gray' size='3'>Enviar</Button>
 
                         <Flex gap='2'>
-                            <Link className='w-1/2' href='https://wa.me/message/GIRAZSPEDZSXE1' target='_blank'>
+                            <Link className='w-1/2' href={urls?.whatssap || undefined} target='_blank'>
                                 <Button className='flex items-center w-full' color='grass' size='3'>
                                     <FaWhatsapp className='text-xl' />Whatsapp
                                 </Button>
                             </Link>
-                            <Link className='w-1/2' href='https://discord.com/users/1127594477536694332' target='_blank'>
+                            <Link className='w-1/2' href={urls?.discord || undefined} target='_blank'>
                                 <Button className='flex items-center w-full' color='indigo' size='3'>
                                     <FaDiscord className='text-xl' />Discord
                                 </Button>

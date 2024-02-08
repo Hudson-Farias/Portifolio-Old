@@ -3,13 +3,21 @@ import { Flex, Link, Heading, Text } from '@radix-ui/themes'
 
 import { FaLinkedin, FaGithub } from 'react-icons/fa'
 
-export default function About() {
-    const roles = ['Desenvolvedor de Software', 'Fullstack', 'Backend', 'Frontend', 'Devops']
+interface PropsI {
+    roles?: string[],
+    urls?: {
+        linkedin: string,
+        github: string
+    }
+}
 
-    const [typedText, setTypedText] = useState(roles[0])
-    const [currentIndex, setCurrentIndex] = useState(roles[0].length)
+export default function About({ roles, urls }: PropsI) {
+    const _roles = ['Desenvolvedor de Software', 'Fullstack', 'Backend', 'Frontend', 'Devops']
+
+    const [typedText, setTypedText] = useState(_roles[0])
+    const [currentIndex, setCurrentIndex] = useState(_roles[0].length)
     const [isDeleting, setIsDeleting] = useState(true)
-    const [textToType, setTextToType] = useState(roles[0])
+    const [textToType, setTextToType] = useState(_roles[0])
 
     useEffect(() => {
         const handleTyping = () => {
@@ -24,7 +32,7 @@ export default function About() {
         } else {
             if (typedText.length === 0) {
                 setIsDeleting(false)
-                setTextToType(prevTextToType => roles[(roles.indexOf(prevTextToType) + 1) % roles.length])
+                setTextToType(prevTextToType => _roles[(_roles.indexOf(prevTextToType) + 1) % _roles.length])
                 return
             }
             setCurrentIndex(prevIndex => prevIndex - 1)
@@ -43,10 +51,10 @@ export default function About() {
             <Flex direction='column' className='w-9/12 md:w-6/12 h-20 md:h-36'>
                 <Flex align='end' gap='2'>
                     <Heading className='text-4xl md:text-8xl text-white' size='9'>Hudson</Heading>
-                    <Link href='https://www.linkedin.com/in/hudsonfarias/' target='_blank'>
+                    <Link href={urls?.linkedin || undefined} target='_blank'>
                         <FaLinkedin className='mb-1 md:mb-4 text-2xl md:text-4xl text-white' />
                     </Link>
-                    <Link href='https://github.com/hudson-farias' target='_blank'>
+                    <Link href={urls?.github || undefined} target='_blank'>
                         <FaGithub className='mb-1 md:mb-4 text-2xl md:text-4xl text-white' />
                     </Link>
                 </Flex>
