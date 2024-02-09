@@ -1,12 +1,13 @@
 'use client'
 
 import React, { useEffect, useRef, useState } from 'react'
-import axios from 'axios'
 
 import About from '@/components/home/about'
 import Contact from '@/components/home/contact'
 
 import styles from '@/styles/home/scrollbar.module.sass'
+
+import { API } from '@/api'
 
 const bgColorDark = 'bg-stone-900'
 const bgColorLight = 'bg-stone-600'
@@ -22,7 +23,6 @@ interface DataI {
 }
 
 export default function Home() {
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL
 
   const [data, setData] = useState<DataI>({})
 
@@ -31,11 +31,9 @@ export default function Home() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await axios.get(`${apiUrl}/infos`)
+      const response = await API.get('/infos')
       const data = response.data
       setData(data)
-
-      console.log(data)
     }
 
     fetchData()

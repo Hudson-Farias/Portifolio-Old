@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
-import axios from 'axios'
 import { Card, Flex, Link, Text, TextField, TextArea, Button } from '@radix-ui/themes'
 
 import { FaWhatsapp, FaDiscord } from 'react-icons/fa'
+
+import { API } from '@/api'
 
 interface PropsI {
     urls?: {
@@ -19,8 +20,6 @@ const contactFormDefault = {
 }
 
 export default function Contact({ urls }: PropsI) {
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL
-
     const [contactData, setContactData] = useState(contactFormDefault)
     const [isToastVisible, setToastVisible] = useState(false)
 
@@ -34,7 +33,7 @@ export default function Contact({ urls }: PropsI) {
         const values = Object.values(contactData);
         if (!values.every(value => value)) return
 
-        await axios.post(`${apiUrl}/contact`, contactData)
+        await API.post('/contact', contactData)
         setContactData(contactFormDefault)
         setToastVisible(true)
 
