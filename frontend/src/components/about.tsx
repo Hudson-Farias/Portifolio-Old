@@ -51,10 +51,10 @@ export default function About({ roles, urls }: PropsI) {
             <Flex direction='column' className='w-9/12 md:w-6/12 h-20 md:h-36'>
                 <Flex align='end' gap='2'>
                     <Heading className='text-4xl md:text-8xl text-white' size='9'>Hudson</Heading>
-                    <Link href={urls?.linkedin || undefined} target='_blank'>
+                    <Link href={urls?.linkedin} target='_blank'>
                         <FaLinkedin className='mb-1 md:mb-4 text-2xl md:text-4xl text-white' />
                     </Link>
-                    <Link href={urls?.github || undefined} target='_blank'>
+                    <Link href={urls?.github} target='_blank'>
                         <FaGithub className='mb-1 md:mb-4 text-2xl md:text-4xl text-white' />
                     </Link>
                 </Flex>

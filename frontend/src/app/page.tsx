@@ -2,8 +2,8 @@
 
 import React, { useEffect, useRef, useState } from 'react'
 
-import About from '@/components/home/about'
-import Contact from '@/components/home/contact'
+import About from '@/components/about'
+import Contact from '@/components/contact'
 
 import styles from '@/styles/home/scrollbar.module.sass'
 
