@@ -43,7 +43,7 @@ export default function About({ roles, urls }: PropsI) {
         const timeoutId = setTimeout(handleTyping, 150)
       
         return () => clearTimeout(timeoutId)
-      }, [roles, currentIndex, textToType, typedText, isDeleting])
+      }, [_roles, currentIndex, textToType, typedText, isDeleting])
 
 
     return (
