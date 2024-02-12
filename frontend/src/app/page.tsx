@@ -3,9 +3,10 @@
 import React, { useEffect, useRef, useState } from 'react'
 
 import About from '@/components/about'
+import Projects from '@/components/projects'
 import Contact from '@/components/contact'
 
-import styles from '@/styles/home/scrollbar.module.sass'
+import styles from '@/styles/scrollbar.module.sass'
 
 import { API } from '@/api'
 
@@ -19,11 +20,17 @@ interface DataI {
     github: string,
     whatssap: string,
     discord: string
-  }
+  },
+  repos?: {
+    id: number,
+    name: string,
+    description: string | null,
+    html_url: string | null,
+    homepage: string | null
+  }[]
 }
 
 export default function Home() {
-
   const [data, setData] = useState<DataI>({})
 
   const [bgColor, setbgColor] = useState(bgColorDark)
@@ -46,6 +53,11 @@ export default function Home() {
       children: <About roles={data.roles} urls={data.urls} />
     },
     {
+      id: 'projects',
+      label: 'Projetos',
+      children: <Projects repos={data.repos} />
+    },
+    {
       id: 'contact',
       label: 'Contato',
       children: <Contact urls={data.urls} />
@@ -61,6 +73,8 @@ export default function Home() {
       const sectionHeight = scrollContainer.clientHeight
 
       const newSection = scrollPosition / sectionHeight
+
+      console.log('ola')
 
       if (newSection % 1 > 0.7) {
         const color = Math.ceil(newSection) % 2 === 0 ? bgColorDark : bgColorLight
